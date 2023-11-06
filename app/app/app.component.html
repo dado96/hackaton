@@ -1,0 +1,40 @@
+<!-- <div style="background-color: rgb(70, 68, 68);">
+      <app-utente></app-utente>
+      <app-negozio></app-negozio>
+</div>
+   -->
+
+   <mat-toolbar color="primary" class="mat- -z8">
+    <a mat-button>
+      <div style="display: flex; align-items: center;">
+        <img style="height: 30px; width: 30px; margin-left: 5px;" src="../assets/Angular_full_color_logo.svg.png" alt="logo Angular">
+        <span style="margin-left: 10px;" routerLink="/">Esercizio</span>
+      </div>
+    </a>
+    <a mat-button style="margin-left: 20px;">
+      <mat-icon>person</mat-icon>
+      <span routerLink="/utente">Sezione Utente</span>
+    </a>
+
+    <a mat-button style="margin-left: 10px;">
+      <mat-icon>store</mat-icon>
+      <span routerLink="/negozio">Sezione Negozio</span>
+    </a>
+
+    <a mat-button style="margin-left: 10px;">
+      <mat-icon>shopping_cart</mat-icon>
+      <span routerLink="/spesa">Sezione Spesa</span>
+    </a>
+
+    <a mat-button style="margin-left: auto;">
+      <div style=" display: flex; align-items: center;">
+        <img style="height: 30px; width: 30px; margin-left: 5px;" src="../assets/icons8-github.svg" alt="logo GitHub">
+        <span style="margin-left: 10px;" [routerLink]="'https://github.com/dado96/progetto-angular'">GitHub</span>
+      </div>
+    </a>
+
+  </mat-toolbar>
+ <router-outlet></router-outlet>
+
+      
+   

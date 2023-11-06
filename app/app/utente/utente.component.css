@@ -1,0 +1,101 @@
+
+
+.button
+{
+    width: auto;
+    height:30px;
+    border-radius: 15px 15px 15px 15px;
+    background-color: grey;
+    border: 2px solid black;
+    color: white;
+    cursor: pointer;
+    margin-top: 2%; 
+    margin: 0;
+}
+
+
+
+.menu-container1 {
+   
+    display: flex;
+    width: 400px;
+    padding: 30px 30px 30px 30px;
+    border-radius: 30px;
+    margin: 20px 0;
+    background-color: rgb(83, 221, 207);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.menu-container2 {
+   
+    display: flex;
+    width: 400px;
+    padding: 30px 30px 30px 30px;
+    border-radius: 30px;
+    margin: 20px 0px;
+    background-color: rgb(243, 153, 123);
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+
+}
+
+
+@media only screen and (max-width:900px){
+    .menu-container {
+        width: 250px;
+    }
+}
+
+.inputContainer
+{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.testi
+{
+    width: 25%; 
+    /* padding-right: 50px; */
+    text-transform: capitalize;
+}
+
+.form
+{
+    background-color: white;
+    height: 56px;
+    border-radius: 5px 5px 5px 5px;
+    cursor: text;
+}
+
+.form2
+{
+    background-color: white;
+    height: 55px;
+    border-radius: 5px 5px 5px 5px;
+    margin-bottom: 3%;
+}
+
+.ul
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    list-style: none;
+    padding: 0;
+}
+
+
+.topping
+{
+    margin-top: 3%;
+    height: 65px;
+}

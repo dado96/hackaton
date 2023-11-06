@@ -1,0 +1,11 @@
+<div class='menu-container2'>
+    <ul class="ul">
+      <li *ngFor="let item of utenti; let i = index">
+        <p class="testi" style="width: 100%; margin: 0;">
+          {{ i + 1 }} - {{ item.nome }} - {{ item.eta }} - {{ item.denaro }} - Products:
+          <ng-container *ngFor="let prodotto of item.prodotti; let j = index">
+            {{ prodotto }} {{ item.quantita[j] }}{{ j !== item.prodotti.length - 1 ? ', ' : '' }}
+          </ng-container>
+        </p>
+      </li>   
+      </ul>
