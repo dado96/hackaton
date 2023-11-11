@@ -1,8 +1,8 @@
-<div style="display: flex; flex-direction: column; width: 100vw; align-items: center;">   
-    <div class='menu-container1 negozio-container'>
+<div style="display: flex; flex-direction: column; width: 100vw; align-items: center; min-height: 100vh;">   
+    <div class='menu-container1'>
       <h2 style="color: black;">Inserisci Negozio</h2>
         <p>
-            <mat-form-field appearance="outline" style="background-color: white; height: 55px; border-radius: 5px 5px 5px 5px; color: black;">
+            <mat-form-field appearance="outline" class="form">
               <mat-label style="color: black;">Nome Negozio</mat-label>
               <input matInput placeholder="Nome Negozio" type="text" id="nameNegozio" name="nameNegozio" [(ngModel)]="nomeNegozio" required minlength="4" maxlength="10">
               <mat-icon matSuffix>store</mat-icon>
@@ -10,7 +10,7 @@
           </p> 
 
          <p>
-            <mat-form-field appearance="outline" style="background-color: white; height: 55px; border-radius: 5px 5px 5px 5px">
+            <mat-form-field appearance="outline" class="form">
               <mat-label style="color: black;">citta</mat-label>
               <input matInput placeholder="citta" type="text" id="cittaNegozio" name="cittaNegozio" [(ngModel)]="citta" required>
               <mat-icon matSuffix>location_city</mat-icon>
@@ -18,7 +18,7 @@
           </p> 
 
           <p>
-            <mat-form-field appearance="outline" style="background-color: white; height: 55px; border-radius: 5px 5px 5px 5px">
+            <mat-form-field appearance="outline" class="form">
               <mat-label style="color: black;">indirizzo</mat-label>
               <input matInput placeholder="indirizzo" type="text" id="wayNegozio" name="wayNegozio" [(ngModel)]="indirizzo" required>
               <mat-icon matSuffix>directions_walk</mat-icon>
@@ -26,7 +26,7 @@
           </p>
           
           <p>
-            <mat-form-field appearance="outline" style="background-color: white; height: 55px; border-radius: 5px 5px 5px 5px">
+            <mat-form-field appearance="outline" class="form">
               <mat-label style="color: black;">orario Apertura</mat-label>
               <input matInput placeholder="orario Apertura" type="number" id="aperturaNegozio" name="AperturaNegozio" [(ngModel)]="orarioApertura" reqiored min="0" max="24">
               <mat-icon matSuffix>access_time</mat-icon>
@@ -34,26 +34,30 @@
           </p>
 
           <p>
-            <mat-form-field appearance="outline" style="background-color: white; height: 55px; border-radius: 5px 5px 5px 5px">
+            <mat-form-field appearance="outline" class="form">
               <mat-label style="color: black;">orario Chiusura</mat-label>
               <input matInput placeholder="orario Chiusura" type="number" id="chiusuraNegozio" name="chiusuraNegozio" [(ngModel)]="orarioChiusura" required min="0" max="24">
               <mat-icon matSuffix>access_time</mat-icon>
             </mat-form-field>
           </p>
 
-         <div>
-            <mat-form-field  class=" topping">
-                <mat-label style="color: black;">Prodotti Venduti</mat-label>
-                <mat-select [(ngModel)]="prodottiVenduti" multiple>
-                  <mat-option *ngFor="let prodottiVenduti of listaProdotti" [value]="prodottiVenduti">{{prodottiVenduti}}</mat-option>
-                </mat-select>
-              </mat-form-field>
-         </div>
-        
-         <button class = "button" type="button" (click)="salvaNegozio()" >salva</button>
+        <div>
+          <a mat-button class="button" (click)="salvaNegozio()">
+            <mat-icon>save</mat-icon>
+            <span>salva</span>
+          </a>
+
+          <a mat-button class="button" style="margin-left: 10px;" (click)="mandaNegozi()">
+            <mat-icon>save</mat-icon>
+            <span>Manda Dati Negozio</span>
+          </a>
+          <!-- <button class = "button" type="button" (click)="salvaNegozio()" >salva</button>
+          <button class = "button" style="margin-left: 10px;" (click)="mandaNegozi()"> manda Dati Negozio</button> -->
+        </div>
+         
      </div>
 
-     <div class='menu-container2'>
+     <div class='menu-container2' >
         <ul class="ul"> 
             <li *ngFor="let item of negozi; let i = index">
                  <p class="testi" style="width: 100%; margin: 0;">
@@ -63,11 +67,22 @@
                     {{item.indirizzo}} -
                     {{item.orarioApertura}}
                     {{item.orarioChiusura}}
-                    {{item.prodottiVenduti}}
                 </p>
-                 <button class = "button" type="button" (click)="eliminaNegozio(i)">delete</button> -
+                <a mat-button class="button" (click)="eliminaNegozio(i)">
+                  <mat-icon>delete</mat-icon>
+                  <span>Delete</span>
+                </a>
+
+                <a mat-button class="button" style="margin-left: 5px;" (click)="updateNegozio(i)">
+                  <mat-icon>sync</mat-icon>
+                  <span>Update</span>
+                </a>
+
+                 <!-- <button class = "button" type="button" (click)="eliminaNegozio(i)">delete</button> -
                  <button class = "button" type="button" (click)="updateNegozio(i)">update</button> -
-                 <button class = "button2" type="button" (click)="updateProdottiVenduti(i)">update Lista</button>
+                 <button class = "button" type="button" (click)="updateProdottiVenduti(i)">update Lista</button> -->
             </li>   
             </ul>
     </div>
+
+    

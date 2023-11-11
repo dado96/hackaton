@@ -1,24 +1,24 @@
-<div style="display: flex; flex-direction: column; width: 100vw; align-items: center;">  
+<div style="display: flex; flex-direction: column; width: 100vw; align-items: center; min-height: 100vh;">  
     <div class='menu-container1'>
          <h2 style="color: black;">Inserisci Utente</h2>
         <p>
-            <mat-form-field appearance="outline" style="background-color: white; height: 55px; border-radius: 5px 5px 5px 5px" >
+            <mat-form-field appearance="outline" class="form" >
               <mat-label style="color: black;">Nome</mat-label>
-              <input matInput placeholder="Nome" type="text" id="nameUser" name="nameUser" [(ngModel)]="name" required minlength="4" maxlength="8">
+              <input matInput placeholder="Nome" type="text" id="nameUser" name="nameUser" [(ngModel)]="name" required minlength="4" maxlength="11">
               <mat-icon matSuffix>person</mat-icon>
             </mat-form-field>
           </p> 
 
          <p>
-            <mat-form-field appearance="outline" style="background-color: white; height: 55px; border-radius: 5px 5px 5px 5px;">
+            <mat-form-field appearance="outline" class="form">
               <mat-label style="color: black;">eta</mat-label>
               <input matInput placeholder="eta" type="number" id="etaUser" name="etaUser" [(ngModel)]="eta" required>
-              <mat-icon matSuffix>looks_one</mat-icon>
+              <mat-icon matSuffix>pin</mat-icon>
             </mat-form-field>
           </p> 
 
           <p>
-            <mat-form-field appearance="outline" style="background-color: white; height: 55px; border-radius: 5px 5px 5px 5px">
+            <mat-form-field appearance="outline" class="form">
               <mat-label style="color: black;">soldi totali</mat-label>
               <input matInput placeholder="soldi totali" type="number" id="walletUser" name="walletUser" [(ngModel)]="denaro" required>
               <mat-icon matSuffix>wallet</mat-icon>
@@ -26,36 +26,43 @@
           </p> 
 
          <div>
-            <mat-form-field  class=" topping">
-                <mat-label style="color: black; ">Prodotti</mat-label>
-                <mat-select [(ngModel)]="listaProdotti" multiple>
-                  <mat-option *ngFor="let prodotto of lista" [value]="prodotto">{{prodotto}}</mat-option>
-                </mat-select>
-              </mat-form-field>
-          </div> 
-
-          <div *ngFor="let prodotto of listaProdotti; let i = index">
-            <mat-form-field appearance="outline" style="background-color: white; height: 55px; border-radius: 5px 5px 5px 5px; margin-bottom: 3%;">
-              <input matInput placeholder="Quantita" type="number" name="quantita" [(ngModel)]="QPP[i]" required>
-            </mat-form-field>
+         
           </div>
-          <button class = "button" style="margin-top: 1%;" type="button" (click)="salva()">salva</button>
+          <div style="display: flex;">
+            <a mat-button class="button" (click)="salvaUtenti()" >
+              <mat-icon>save</mat-icon>
+              <span>salva</span>
+            </a>
+
+            <a mat-button class="button" style="margin-left: 10px;" (click)="mandaUtente()">
+              <mat-icon>save</mat-icon>
+              <span>Manda dati Utente</span>
+            </a>
+          </div>
+          
           
      </div>
      <div class='menu-container2'>
       <ul class="ul">
         <li *ngFor="let item of users; let i = index">
           <p class="testi" style="width: 100%; margin: 0;">
-            {{ i + 1 }} - {{ item.nome }} - {{ item.eta }} - {{ item.denaro }} - Products:
-            <ng-container *ngFor="let prodotto of item.prodotti; let j = index">
-              {{ prodotto }} {{ item.quantita[j] }}{{ j !== item.prodotti.length - 1 ? ', ' : '' }}
-            </ng-container>
+            {{ i + 1 }} - {{ item.nome }} - {{ item.age }} anni - {{ item.wallet }} €
+            
           </p>
-             <button class = "button" type="button" (click)="elimina(i)">delete</button> -
-             <button class = "button" type="button" (click)="update(i)">update</button> -
-             <button class = "button2" type="button" (click)="updateLista(i)">update Lista</button>
+          <a mat-button class="button" (click)="elimina(i)">
+            <mat-icon>delete</mat-icon>
+            <span>Delete</span>
+          </a>
+
+          <a mat-button class="button" style="margin-left: 5px;" (click)="update(i)">
+            <mat-icon>sync</mat-icon>
+            <span>Update</span>
+          </a>
+             
         </li>   
         </ul>
 </div>
 </div>
+
+
 

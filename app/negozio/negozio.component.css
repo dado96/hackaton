@@ -2,18 +2,7 @@
 
 .button
 {
-    width: 60px;
-    height:30px;
-    border-radius: 15px 15px 15px 15px;
-    background-color: grey;
-    border: 2px solid black;
-    color: white;
-    cursor: pointer;
-    margin-top: 2%;
-}
-.button2
-{
-    width: 100px;
+    width: auto;
     height:30px;
     border-radius: 15px 15px 15px 15px;
     background-color: grey;
@@ -76,8 +65,10 @@
 
 .form
 {
-    width: 80%;
-    height: 20px;
+    background-color: white;
+    height: 55px;
+    border-radius: 5px 5px 5px 5px;
+    cursor: text;
 }
 
 .ul
@@ -91,19 +82,6 @@
     padding: 0;
 }
 
-.slider
-{
-    display: flex;
-    justify-content: end;
-    background-color: rgba(206, 0, 192, 0.829);
-    margin-right: 3%;
-}
-
-.moon
-{
-    margin-top: 0.3%;
-    margin-right: 0.7%;
-}
 
 .topping
 {

@@ -2,27 +2,18 @@
 
 .button
 {
-    width: 60px;
+    width: auto;
     height:30px;
     border-radius: 15px 15px 15px 15px;
     background-color: grey;
     border: 2px solid black;
     color: white;
     cursor: pointer;
-    margin-top: 2%;
+    margin-top: 2%; 
+    margin: 0;
 }
 
-.button2
-{
-    width: 100px;
-    height:30px;
-    border-radius: 15px 15px 15px 15px;
-    background-color: grey;
-    border: 2px solid black;
-    color: white;
-    cursor: pointer;
-    margin-top: 2%;
-}
+
 
 .menu-container1 {
    
@@ -77,8 +68,18 @@
 
 .form
 {
-    width: 80%;
-    height: 20px;
+    background-color: white;
+    height: 56px;
+    border-radius: 5px 5px 5px 5px;
+    cursor: text;
+}
+
+.form2
+{
+    background-color: white;
+    height: 55px;
+    border-radius: 5px 5px 5px 5px;
+    margin-bottom: 3%;
 }
 
 .ul

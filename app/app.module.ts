@@ -15,7 +15,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MyDialogComponent } from './my-dialog/my-dialog.component';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
-import { DialogConfig } from '@angular/cdk/dialog';
+import { SpesaComponent } from './spesa/spesa.component';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { UserService } from './servizi/users.service';
+import { HttpClientModule } from '@angular/common/http';
+
+
+
 
 
 @NgModule({
@@ -26,7 +33,7 @@ import { DialogConfig } from '@angular/cdk/dialog';
     MyDialogComponent,
     DeleteDialogComponent,
     EditDialogComponent,
-
+    SpesaComponent
   ],
   imports: [
     FormsModule,
@@ -39,9 +46,12 @@ import { DialogConfig } from '@angular/cdk/dialog';
     MatInputModule, 
     MatIconModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    MatMenuModule,
+    MatToolbarModule,
+    HttpClientModule
   ],
-  providers: [ { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } as MatDialogConfig }],
+  providers: [ { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } as MatDialogConfig }, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

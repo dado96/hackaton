@@ -3,6 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { MyDialogComponent } from '../my-dialog/my-dialog.component';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
+import { DatiService } from '../dati.service';
+import { NegozioService } from '../servizi/negozio.service';
+import { NegozioModels } from '../modelli/negozio/negozio.models';
 
 
 
@@ -26,7 +29,8 @@ export class NegozioComponent
 
   listaProdotti=["cavolo","funghi","insalata","mele","pere","uva","anguria","melone","kiwi","kaki","fichi d'india"];
 
-  constructor(private dialog: MatDialog){}
+  constructor(private dialog: MatDialog, private dati: DatiService, private NegozioService: NegozioService){}
+  ngOnInit(): void {this.caricaNegozi();}
 
 
   salvaNegozio()
@@ -42,17 +46,28 @@ export class NegozioComponent
       )
 
       {
-        this.negozi.push(new Negozio
-          (
-            this.nomeNegozio,
-            this.citta,
-            this.indirizzo,
-            this.orarioApertura,
-            this.orarioChiusura,
-            this.prodottiVenduti,
-            ));
-      }
+        const nuovoNegozio: NegozioModels={
+          id:0,
+          nomeNegozio: this.nomeNegozio,
+          citta: this.citta,
+          indirizzo: this.indirizzo,
+          orarioApertura: this.orarioApertura,
+          orarioChiusura: this.orarioChiusura,
+        };
 
+        this.NegozioService.PostNegozio (nuovoNegozio)
+          .then((risposta) =>
+          {
+            console.log("Negozio inviato con successo: ", risposta);
+            this.negozi.push(nuovoNegozio);
+          })
+
+          .catch ((errore)=>
+          {
+            console.error("Errore durante l'invio del negozio:", errore)
+            this.dialog.open(MyDialogComponent);
+          })
+      }
       else
       {
         this.dialog.open(MyDialogComponent);   
@@ -61,26 +76,44 @@ export class NegozioComponent
       console.log("hai premuto salva");
    }
 
+   caricaNegozi() {
+    this.NegozioService.GetNegozi().then((negozi: any) => {
+      console.log('Negozi recuperati:', negozi);
+      this.negozi.push(negozi);
+      this.negozi = negozi;
+    });
+  }
+
+   mandaNegozi()
+   {
+    this.dati.setNegozi (this.negozi)
+   }
+
    eliminaNegozio(i: number)
    {
-    const dialogRef = this.dialog.open(DeleteDialogComponent,
-      {
-        data: { indexToDelete: i }
-      });
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      data: { indexToDelete: i },
+    });
 
-      dialogRef.afterClosed().subscribe( result =>
-      {
-        if(result === 'delete')
-        {
-          this.negozi.splice(i,1);
-          console.log("Negozio cancellato");
-        }
-        else
-        {
-          console.log("operazione annullata");
-        }
-      })
-   }
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'delete') {
+        const negozioIdToDelete = this.negozi[i].id; // Assicurati che l'utente abbia un campo "id"
+        
+        this.NegozioService.deleteNegozio(negozioIdToDelete)
+          .then(() => {
+            // Rimuovi l'utente dall'array locale
+            this.negozi.splice(i, 1);
+            console.log('Negozio eliminato con successo');
+          })
+          .catch((error) => {
+            // Gestisci eventuali errori durante l'eliminazione
+            console.error('Errore durante l\'eliminazione del\'negozio:', error);
+          });
+      } else {
+        console.log('Operazione annullata');
+      }
+    });
+  }
 
    updateNegozio(i:number)
    {
@@ -93,21 +126,39 @@ export class NegozioComponent
         {
           if(result === 'modifica')
           {
+            const NegozioIdToUpdate = this.negozi[i].id;
+            const updateNegozio: NegozioModels=
+            {
+              id: NegozioIdToUpdate,
+              nomeNegozio: this.nomeNegozio,
+              citta: this.citta,
+              indirizzo: this.indirizzo,
+              orarioApertura:this.orarioApertura,
+              orarioChiusura:this.orarioChiusura,
+            };
+
             if(
-                this.nomeNegozio !="" &&
-                this.citta != "" &&
-                this.indirizzo!= "" &&
-                this.orarioApertura>=1 &&
-                this.orarioApertura<=24 &&
-                this.orarioChiusura>=1 &&
-                this.orarioChiusura<=24
+                updateNegozio.nomeNegozio !="" &&
+                updateNegozio.citta != "" &&
+                updateNegozio.indirizzo!= "" &&
+                updateNegozio.orarioApertura>=1 &&
+                updateNegozio.orarioApertura<=24 &&
+                updateNegozio.orarioChiusura>=1 &&
+                updateNegozio.orarioChiusura<=24
               )
               {
-                this.negozi[i].nomeNegozio= this.nomeNegozio;
-                this.negozi[i].citta= this.citta;
-                this.negozi[i].indirizzo= this.indirizzo;
-                this.negozi[i].orarioApertura= this.orarioApertura;
-                this.negozi[i].orarioChiusura= this.orarioChiusura;
+                this.NegozioService
+                .UpdateNegozi(NegozioIdToUpdate, updateNegozio)
+                .then (()=>
+                {
+                  this.negozi[i]= updateNegozio;
+                  console.log('Negozio aggiornato con successo');
+                })
+                .catch((error) => {
+                  // Gestisci eventuali errori durante l'aggiornamento nel backend
+                  console.error('Errore durante l\'aggiornamento del Negozio:', error);
+                  this.dialog.open(MyDialogComponent);
+                });
               }
               else
               {
@@ -118,24 +169,6 @@ export class NegozioComponent
 
         console.log("record modificato");
    }
-
-   updateProdottiVenduti(i: number)
-   {
-    const dialogRef = this.dialog.open(EditDialogComponent,
-      {
-        data: { indexToEdit: i }
-      });
-
-      dialogRef.afterClosed().subscribe( result =>
-      {
-        if(result === 'modifica')
-        {
-          this.negozi[i].prodottiVenduti= this.prodottiVenduti;
-          console.log("lista spesa modificata");
-        }
-      })
-    
-   }
 }
 
 
@@ -145,7 +178,7 @@ class Negozio {
   indirizzo: string;
   orarioApertura: number;
   orarioChiusura: number;
-  prodottiVenduti: string[];
+  id!: number;
 
   constructor
   ( nomeNegozio: string,
@@ -153,7 +186,6 @@ class Negozio {
     indirizzo: string,
     orarioApertura: number,
     orarioChiusura: number,
-    prodottiVenduti: string[]=[],
     ) 
     {
     this.nomeNegozio = nomeNegozio;
@@ -161,7 +193,6 @@ class Negozio {
     this.indirizzo = indirizzo;
     this.orarioApertura = orarioApertura;
     this.orarioChiusura = orarioChiusura;
-    this.prodottiVenduti = prodottiVenduti; 
   }
 
 }
