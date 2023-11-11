@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component, OnInit } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +20,12 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { UserService } from './servizi/users.service';
 import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FontAwesomeModule,FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { faGithub, faAngular } from '@fortawesome/free-brands-svg-icons';
+
+
+
 
 
 
@@ -33,7 +39,7 @@ import { HttpClientModule } from '@angular/common/http';
     MyDialogComponent,
     DeleteDialogComponent,
     EditDialogComponent,
-    SpesaComponent
+    SpesaComponent,
   ],
   imports: [
     FormsModule,
@@ -49,9 +55,16 @@ import { HttpClientModule } from '@angular/common/http';
     MatButtonModule,
     MatMenuModule,
     MatToolbarModule,
-    HttpClientModule
+    HttpClientModule,
+    FontAwesomeModule,
+    NgbModule
   ],
   providers: [ { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } as MatDialogConfig }, UserService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule
+{
+  constructor(library: FaIconLibrary) {
+    library.addIcons (faGithub, faAngular);
+}
+}

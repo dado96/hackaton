@@ -1,36 +1,35 @@
 <!-- <div style="background-color: rgb(70, 68, 68);">
       <app-utente></app-utente>
       <app-negozio></app-negozio>
-</div>
-   -->
+</div-->
 
    <mat-toolbar color="primary" class="mat-elevation-z8">
-    <a mat-button routerLink="/">
+    <a mat-button routerLink="/" class="button">
       <div style="display: flex; align-items: center;">
-        <img  style="height: 30px; width: 30px; margin-left: 5px;" src="../assets/Angular_full_color_logo.svg.png" alt="logo Angular">
+        <fa-icon [icon]="['fab', 'angular']" size="2xl" ></fa-icon>
         <span style="margin-left: 10px;">Esercizio</span>
       </div>
     </a>
-    <a mat-button routerLink="/utente" style="margin-left: 20px;">
+    <a mat-button routerLink="/utente" class="button">
       <mat-icon>person</mat-icon>
       <span >Sezione Utente</span>
     </a>
 
-    <a mat-button routerLink="/negozio" style="margin-left: 10px;">
+    <a mat-button routerLink="/negozio" class="button">
       <mat-icon>store</mat-icon>
       <span>Sezione Negozio</span>
     </a>
 
-    <a mat-button routerLink="/spesa" style="margin-left: 10px;">
+    <a mat-button routerLink="/spesa" class="button">
       <mat-icon>shopping_cart</mat-icon>
       <span>Sezione Spesa</span>
     </a>
 
-    <a href="https://github.com/dado96/progetto-angular" target="_blank" mat-button style="margin-left: auto;">
-      <div style="display: flex; align-items: center;">
-        <img style="height: 30px; width: 30px; margin-left: 5px;" src="../assets/icons8-github.svg" alt="logo GitHub">
+    <a href="https://github.com/dado96/progetto-angular" target="_blank" mat-button class="gitButton" >
+      <div style="display: flex; align-items: center;" class="testoGitHub">
+        <fa-icon [icon]="['fab', 'github']" size="2xl"></fa-icon>
         <span style="margin-left: 10px;">
-          <a style="text-decoration: none; color: white;">GitHub</a>
+          <a>GitHub</a>
         </span>
       </div>
     </a>
